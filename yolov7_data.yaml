@@ -1,0 +1,10 @@
+# train and val data as 1) directory: path/images/, 2) file: path/images.txt, or 3) list: [path1/images/, path2/images/]
+train: /Users/marco/Desktop/GRAZPEDWRI-DX/data/images/train
+val: /Users/marco/Desktop/GRAZPEDWRI-DX/data/images/valid
+test: /Users/marco/Desktop/GRAZPEDWRI-DX/data/images/test
+
+# number of classes
+nc: 9
+
+# class names
+names: ["boneanomaly", "bonelesion", "foreignbody", "fracture", "metal", "periostealreaction", "pronatorsign", "softtissue", "text"]
