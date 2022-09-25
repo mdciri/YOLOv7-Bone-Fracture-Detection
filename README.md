@@ -74,7 +74,7 @@ Follow the instruction in the YOLOv7 repo scripts `train.py` and `test.py` to tr
 
 ## Results
 
-In `rruns/train/yolov7/weights/yolov7-p6-bonefracture.pt` are saved the weights of the YOLOv7 trained model using the `p6` hyper-parameters.
+In `runs/train/yolov7/weights/yolov7-p6-bonefracture.pt` are saved the weights of the YOLOv7 trained model using the `p6` hyper-parameters.
 
 The evaluation of the 3 different datasets is collected in the `runs/test` folder. For each dataset are saved the predicted labels by the model, the confusion matrix, the F1, P, R, and PR curve plot.
 
