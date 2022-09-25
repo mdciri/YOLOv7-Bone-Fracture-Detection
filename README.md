@@ -84,7 +84,7 @@ The evaluation of the 3 different datasets is collected in the `runs/test` folde
 You can use `data_overview.ipnb` to describe a dataset table (one `.csv` file) and visulize few model predictions compared to the relative ground-truths.
 
 ![overview](overview_pred.png)
-*Fig2: few random testing images visulaization within their realive ground-truths and the predicted label, relative bounding box, and, confidence score by the YOLOv7-p6 model.*
+*Fig2: few random testing images visulaization within their realive ground-truths and the predicted label, relative bounding box, and confidence score by the YOLOv7-p6 model.*
 
 ## References
 
