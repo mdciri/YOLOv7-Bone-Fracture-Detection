@@ -23,7 +23,6 @@ First download the YOLOv7 repo:
 
     git clone https://github.com/WongKinYiu/yolov7.git
     cd yolov7
-    mkdir GRAZPEDWRI-DX_dataset
 
 Then download the GRAZPEDWRI-DX dataset and stored it in the `GRAZPEDWRI-DX_dataset` folder. Keep the YOLO annotations (`.txt` files) and extract the images from the `.zip` into the `images` folder.
 
