@@ -71,7 +71,7 @@ The script will create 3 files: `train_data.csv`, `valid_data.csv`, and `test_da
 
 ## Train, test, detect
 
-Follow the instruction in `train.py` and `test.py` to train and evaluate the model. Whereas to perform inference use `detect.py`.
+Follow the instruction in the YOLOv7 repo scripts `train.py` and `test.py` to train and evaluate the model respectively. Whereas to perform inference use `detect.py`.
 
 ## Results
 
