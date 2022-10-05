@@ -78,6 +78,12 @@ In `runs/train/yolov7/weights/yolov7-p6-bonefracture.pt` are saved the weights o
 
 The evaluation of the 3 different datasets is collected in the `runs/test` folder. For each dataset are saved the predicted labels by the model, the confusion matrix, the F1, P, R, and PR curve plot.
 
+## ONNX Inference
+
+    python inference.oonx.py --model-path runs/train/yolov7/weights/yolov7-p6-bonefracture.onnx --img-path <input image path> --dst-path <destination folder to save predictions>
+
+Perform inference on the input image and save the results (the predicted labelled image in `.png` file, and the predicted labels in `.txt` file) in the destination folder indicated.
+
 ## Visualization
 
 You can use `data_overview.ipnb` to describe a dataset table (one `.csv` file) and visulize few model predictions compared to the relative ground-truths.
