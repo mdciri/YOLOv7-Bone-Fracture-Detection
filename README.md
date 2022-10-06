@@ -68,28 +68,32 @@ will divide the dataset into training, validation, and testing set (70-20-10 %) 
 
 The script will create 3 files: `train_data.csv`, `valid_data.csv`, and `test_data.csv` with the same structure of `dataset.csv`.
 
+## ONNX Inference
+
+It is available the ONNX model in `runs/train/yolov7/weights/yolov7-p6-bonefracture.onnx`, and inferece can be performed:
+
+    python inference_onnx.py --model-path runs/train/yolov7/weights/yolov7-p6-bonefracture.onnx --img-path <input image path> --dst-path <destination folder to save predictions>
+
+The results (the predicted labelled image in `.png` file, and the predicted labels in `.txt` file) in the destination folder indicated.
+
+N.B.: remeber to install the requirements:
+
+    pip install onnx onnxruntime
+
 ## Train, test, detect
 
-Follow the instruction in the YOLOv7 repo scripts `train.py` and `test.py` to train and evaluate the model respectively. Whereas to perform inference use `detect.py`.
+The torch model is also available in `runs/train/yolov7/weights/yolov7-p6-bonefracture.pt` and you can evaluate it or perform inference using `test.py` and `detect.py` script respectively of the YOLOv7 repo. On the contrary, if you want to train the model, use `train.py`.
 
 ## Results
 
-In `runs/train/yolov7/weights/yolov7-p6-bonefracture.pt` are saved the weights of the YOLOv7 trained model using the `p6` hyper-parameters.
-
 The evaluation of the 3 different datasets is collected in the `runs/test` folder. For each dataset are saved the predicted labels by the model, the confusion matrix, the F1, P, R, and PR curve plot.
-
-## ONNX Inference
-
-    python inference.oonx.py --model-path runs/train/yolov7/weights/yolov7-p6-bonefracture.onnx --img-path <input image path> --dst-path <destination folder to save predictions>
-
-Perform inference on the input image and save the results (the predicted labelled image in `.png` file, and the predicted labels in `.txt` file) in the destination folder indicated.
 
 ## Visualization
 
-You can use `data_overview.ipnb` to describe a dataset table (one `.csv` file) and visulize few model predictions compared to the relative ground-truths.
+You can use `data_overview.ipnb` to describe a dataset (`.csv` file) and visulize the ground-truth labels with or without the predicted ones as in Figure 2 here below.
 
 ![overview](overview_pred.png)
-*Fig2: few random testing images visulaization within their realive ground-truths and the predicted label, relative bounding box, and confidence score by the YOLOv7-p6 model.*
+*Fig2: few random testing images visualization within their realive ground-truth and the predicted labels with their confidence score by the trained YOLOv7-p6 model.*
 
 ## References
 
