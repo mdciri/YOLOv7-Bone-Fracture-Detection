@@ -27,9 +27,9 @@ def load_img(img_file, img_mean=0, img_scale=1/255):
     return img
 
 
-def model_inference(model_path, image_np, cuda=False):
+def model_inference(model_path, image_np, device="cpu"):
 
-    providers = ['CUDAExecutionProvider'] if cuda else ['CPUExecutionProvider']
+    providers = ['CUDAExecutionProvider'] if device=="cuda" else ['CPUExecutionProvider']
     session = onnxruntime.InferenceSession(model_path, providers=providers)
     input_name = session.get_inputs()[0].name
     output_name = session.get_outputs()[0].name
@@ -38,10 +38,12 @@ def model_inference(model_path, image_np, cuda=False):
     return output[0][:, :6]
 
 
-def post_process(img_file, output, score_threshold=0.3):
+def post_process(img_file, output, score_threshold=0.3, format="xywh"):
     """
     Draw bounding boxes on the input image. Dump boxes in a txt file.
     """
+    assert format == "xyxy" or format == "xywh"
+
     det_bboxes, det_scores, det_labels = output[:, 0:4], output[:, 4], output[:, 5]
     id2names = {
         0: "boneanomaly", 1: "bonelesion", 2: "foreignbody", 
@@ -50,42 +52,45 @@ def post_process(img_file, output, score_threshold=0.3):
     }
 
     img = cv2.imread(img_file)
-    org_size = img.shape[:2]
-    img = cv2.resize(img, (640, 640), interpolation=cv2.INTER_LINEAR)
+    H, W = img.shape[:2]
+    h, w = 640, 640
     label_txt = ""
 
     for idx in range(len(det_bboxes)):
         if det_scores[idx]>score_threshold:
             bbox = det_bboxes[idx]
+            bbox = bbox @ np.array([[W/w, 0, 0, 0], [0, H/h, 0, 0], [0, 0, W/w, 0], [0, 0, 0, H/h]])
+            bbox_int = [int(x) for x in bbox]
             label = det_labels[idx]
-
+            
             label_txt += f"{int(label)} {bbox[0]:.5f} {bbox[1]:.5f} {bbox[2]:.5f} {bbox[3]:.5f} {det_scores[idx]:.5f}\n"
 
             color_map = colors[int(label)]
             txt = f"{id2names[label]} {det_scores[idx]:.2f}"
             (text_width, text_height), _ = cv2.getTextSize(txt, cv2.FONT_HERSHEY_SIMPLEX, 0.5, 2)
-            bbox = [int(x) for x in bbox]
-            cv2.rectangle(img, (bbox[0], bbox[1]), (bbox[2], bbox[3]), color_map, 2)
-            cv2.rectangle(img, (bbox[0]-2, bbox[1]-text_height-10), (bbox[0] + text_width+2, bbox[1]), color_map, -1)
-            cv2.putText(img, txt, (bbox[0], bbox[1]-5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
             
-    img = cv2.resize(img, org_size[::-1], interpolation=cv2.INTER_LINEAR)
+            cv2.rectangle(img, (bbox_int[0], bbox_int[1]), (bbox_int[2], bbox_int[3]), color_map, 2)
+            cv2.rectangle(img, (bbox_int[0]-2, bbox_int[1]-text_height-10), (bbox_int[0] + text_width+2, bbox_int[1]), color_map, -1)
+            cv2.putText(img, txt, (bbox_int[0], bbox_int[1]-5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
     
     return img, label_txt
 
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model-path", type=str, default="runs/train/yolov7/weights/yolov7-p6-bonefracture.onnx")
-    parser.add_argument("--img-path", type=str)
-    parser.add_argument("--dst-path", type=str, default=None)
+    parser.add_argument("--model-path", type=str, default="runs/train/yolov7/weights/yolov7-p6-bonefracture.onnx", help="ONNX model path")
+    parser.add_argument("--img-path", type=str, help="input image path")
+    parser.add_argument("--dst-path", type=str, default=None, help="folder path destination")
+    parser.add_argument("--device", type=str, default="cpu", help="device for onnxruntime provider")
     args = parser.parse_args()
+
+    assert args.device == "cpu" or args.device == "cuda"
 
     # laod image
     img = load_img(args.img_path)
 
     # inference
-    out = model_inference(args.model_path, img)
+    out = model_inference(args.model_path, img, args.device)
 
     # post-processing
     start_time = time.time()
