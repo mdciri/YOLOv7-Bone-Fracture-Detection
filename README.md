@@ -80,6 +80,10 @@ N.B.: remeber to install the requirements:
 
     pip install onnx onnxruntime
 
+## App GUI
+
+*Coming soon*
+
 ## Train, test, detect
 
 The torch model is also available in `runs/train/yolov7/weights/yolov7-p6-bonefracture.pt` and you can evaluate it or perform inference using `test.py` and `detect.py` script respectively of the YOLOv7 repo. On the contrary, if you want to train the model, use `train.py`.
