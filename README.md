@@ -72,9 +72,15 @@ The script will create 3 files: `train_data.csv`, `valid_data.csv`, and `test_da
 
 It is available the ONNX model in `runs/train/yolov7/weights/yolov7-p6-bonefracture.onnx`, and inferece can be performed:
 
-    python inference_onnx.py --model-path runs/train/yolov7/weights/yolov7-p6-bonefracture.onnx --img-path <input image path> --dst-path <destination folder to save predictions>
+    python inference_onnx.py --model-path <onnx model path> --img-path <input image path> --dst-path <destination folder for predictions>
 
-The results (the predicted labelled image in `.png` file, and the predicted labels in `.txt` file) in the destination folder indicated.
+for example:
+
+    python inference_onnx.py --model-path runs/train/yolov7/weights/yolov7-p6-bonefracture.onnx --img-path ./GRAZPEDWRI-DX_dataset/images/test/0038_0775938745_03_WRI-L2_M014.png --dst-path ./predictions
+
+The results (the predicted labelled image in `.png` file, and the predicted labels in `.txt` file) in the destination folder indicated. Each detection is saved as:
+
+    <class> <confidence_score> <bbox_Xcenter> <bbox_Ycenter> <bbox_Width> <bbox_Height>
 
 N.B.: remeber to install the requirements:
 
@@ -82,7 +88,13 @@ N.B.: remeber to install the requirements:
 
 ## App GUI
 
-*Coming soon*
+    python app/app.py
+
+GUI icons were made by [Freepik](https://www.flaticon.com/authors/freepik), [smashingstocks](https://www.flaticon.com/authors/smashingstocks), [photo3idea_studio](https://www.flaticon.com/authors/photo3idea-studio), [Yogi Aprelliyanto](https://www.flaticon.com/authors/yogi-aprelliyanto), [Muhammad Ali](https://www.flaticon.com/authors/muhammad-ali), and [dmitri13](https://www.flaticon.com/authors/dmitri13) from [www.flaticon.com](www.flaticon.com).
+
+The GUI is done using PySide6, so first install it with:
+
+    pip install PySide6
 
 ## Train, test, detect
 
