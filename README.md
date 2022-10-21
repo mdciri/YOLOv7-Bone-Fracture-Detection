@@ -98,6 +98,15 @@ The GUI is done using PySide6, so first install it with:
 
 ![overview](images/app.png)
 
+## WebApp
+
+    streamlit run app/webapp.py  
+
+## Docker
+
+    docker pull mdciri/bone-fracture-detection:latest
+    docker run -p 8501:8501 mdciri/bone-fracture-detection
+
 ## Train, test, detect
 
 The torch model is also available in `runs/train/yolov7/weights/yolov7-p6-bonefracture.pt` and you can evaluate it or perform inference using `test.py` and `detect.py` script respectively of the YOLOv7 repo. On the contrary, if you want to train the model, use `train.py`.
