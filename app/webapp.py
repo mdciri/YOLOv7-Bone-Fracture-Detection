@@ -5,7 +5,7 @@ import streamlit as st
 import onnxruntime as ort
 from matplotlib.colors import TABLEAU_COLORS 
 
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+ALLOWED_EXTENSIONS = {"txt", "pdf", "png", "jpg", "jpeg", "gif"}
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 h, w = 640, 640
 model_onnx_path = os.path.join(BASE_DIR, "yolov7-p6-bonefracture.onnx")
@@ -44,7 +44,7 @@ def preproc(img):
 
 def model_inference(model_path, image_np, device="cpu"):
 
-    providers = ['CUDAExecutionProvider'] if device=="cuda" else ['CPUExecutionProvider']
+    providers = ["CUDAExecutionProvider"] if device=="cuda" else ["CPUExecutionProvider"]
     session = ort.InferenceSession(model_path, providers=providers)
     input_name = session.get_inputs()[0].name
     output_name = session.get_outputs()[0].name
@@ -97,9 +97,9 @@ def post_process(img, output, score_threshold=0.3, format="xywh"):
 
 if __name__ == "__main__":
 
-    st.title('Bone Fracture Detection')
+    st.title("Bone Fracture Detection")
     
-    uploaded_file = st.file_uploader("Choose a image file", type=['png', 'jpg', 'jpeg', 'gif'])
+    uploaded_file = st.file_uploader("Choose a image file", type=["png", "jpg", "jpeg", "gif"])
     
     if uploaded_file is not None:
         
@@ -116,7 +116,7 @@ if __name__ == "__main__":
 
         st.download_button(
             label="Download prediction",
-            data=cv2.imencode('.png', out_img[..., ::-1])[1].tobytes(),
+            data=cv2.imencode(".png", out_img[..., ::-1])[1].tobytes(),
             file_name=uploaded_file.name,
             mime="image/png"
         )
