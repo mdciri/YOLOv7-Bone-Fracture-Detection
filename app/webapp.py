@@ -7,12 +7,8 @@ from matplotlib.colors import TABLEAU_COLORS
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-SAVE_DIR = os.path.join(BASE_DIR, "predictions")
-os.makedirs(SAVE_DIR, exist_ok=True)
 h, w = 640, 640
-
 model_onnx_path = os.path.join(BASE_DIR, "yolov7-p6-bonefracture.onnx")
-score_thres = 0.25
 bbox_format = "xywh"
 device = "cpu"
 
@@ -107,21 +103,26 @@ if __name__ == "__main__":
     
     if uploaded_file is not None:
         
+        conf_thres = st.slider("Object confidence threshold", 0.2, 1., step=0.05)
+
         # load and display orignal image
         img = load_img(uploaded_file)
-        st.image(img, caption="Original Image", channels="RGB")
 
         # inference
         img_pp = preproc(img)
         out = model_inference(model_onnx_path, img_pp, device)
-        out_img, out_txt = post_process(img, out, score_thres, bbox_format)
+        out_img, out_txt = post_process(img, out, conf_thres, bbox_format)
         st.image(out_img, caption="Prediction", channels="RGB")
 
-        file_out_img = os.path.join(SAVE_DIR, uploaded_file.name)
-        file_out_txt = os.path.join(SAVE_DIR, uploaded_file.name[:-4] + ".txt")
-        if st.button('Save Results'):
-            cv2.imwrite(file_out_img, out_img[..., ::-1])
-            with open(file_out_txt, 'w') as f:
-                f.write(out_txt)
-            
-            st.write(f"Results saved in {SAVE_DIR}.")
+        st.download_button(
+            label="Download prediction",
+            data=cv2.imencode('.jpg', out_img[..., ::-1])[1].tobytes(),
+            file_name=uploaded_file.name,
+            mime="image/png"
+        )
+        st.download_button(
+            label="Download detections",
+            data=out_txt,
+            file_name=uploaded_file.name[:-4] + ".txt",
+            mime="text/plain"
+        )
