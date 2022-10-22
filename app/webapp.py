@@ -116,7 +116,7 @@ if __name__ == "__main__":
 
         st.download_button(
             label="Download prediction",
-            data=cv2.imencode('.jpg', out_img[..., ::-1])[1].tobytes(),
+            data=cv2.imencode('.png', out_img[..., ::-1])[1].tobytes(),
             file_name=uploaded_file.name,
             mime="image/png"
         )
