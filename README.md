@@ -3,7 +3,7 @@
 Trained YOLOv7 for bone fracture detections.
 
 [![python](https://img.shields.io/badge/Python-3.9-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
-[![pytorch](https://img.shields.io/badge/PyTorch-1.12.1-EE4C2C.svg?style=flat&logo=pytorch)](https://pytorch.org)
+[![pytorch](https://img.shields.io/badge/PyTorch-1.13.1-EE4C2C.svg?style=flat&logo=pytorch)](https://pytorch.org)
 [![Docker pulls](https://img.shields.io/docker/pulls/mdciri/bone-fracture-detection)](https://hub.docker.com/repository/docker/mdciri/bone-fracture-detection)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.13.0-FF4B4B.svg?style=flat&logo=Streamlit&logoColor=white)](https://streamlit.io)
 [![License: GPLv3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
