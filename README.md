@@ -7,7 +7,7 @@ Trained YOLOv7 for bone fracture detections.
 [![Docker pulls](https://img.shields.io/docker/pulls/mdciri/bone-fracture-detection)](https://hub.docker.com/repository/docker/mdciri/bone-fracture-detection)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.13.0-FF4B4B.svg?style=flat&logo=Streamlit&logoColor=white)](https://streamlit.io)
 [![License: GPLv3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-
+ 
 ## Data
 The [GRAZPEDWRI-DX](https://www.nature.com/articles/s41597-022-01328-z) is a open dataset containing 20327 annotated pediatric trauma wrist radiograph images of 6091 patients, treated at the Department for Pediatric Surgery of the University Hospital Graz between 2008 and 2018. Several pediatric radiologists annotated the images by placing bounding boxes to mark 9 different classes:
 
