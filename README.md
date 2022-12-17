@@ -1,5 +1,14 @@
-# YOLOv7 for the GRAZPEDWRI-DX dataset
+# YOLOv7 for Bone Fractures Detection
 
+Trained YOLOv7 for bone fracture detections.
+
+[![python](https://img.shields.io/badge/Python-3.9-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
+[![pytorch](https://img.shields.io/badge/PyTorch-1.12.1-EE4C2C.svg?style=flat&logo=pytorch)](https://pytorch.org)
+[![Docker pulls](https://img.shields.io/docker/pulls/mdciri/bone-fracture-detection)](https://hub.docker.com/repository/docker/mdciri/bone-fracture-detection)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.13.0-FF4B4B.svg?style=flat&logo=Streamlit&logoColor=white)](https://streamlit.io)
+[![License: GPLv3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
+## Data
 The [GRAZPEDWRI-DX](https://www.nature.com/articles/s41597-022-01328-z) is a open dataset containing 20327 annotated pediatric trauma wrist radiograph images of 6091 patients, treated at the Department for Pediatric Surgery of the University Hospital Graz between 2008 and 2018. Several pediatric radiologists annotated the images by placing bounding boxes to mark 9 different classes:
 
 - `boneanomaly`  (276 boxes),
@@ -121,6 +130,10 @@ You can use `data_overview.ipnb` to describe a dataset (`.csv` file) and visuliz
 
 ![overview](images/overview_pred.png)
 *Fig2: few random testing images visualization within their realive ground-truth and the predicted labels with their confidence score by the trained YOLOv7-p6 model.*
+
+## License
+
+GNU General Public License v3.0 as for [YOLOv7](https://github.com/WongKinYiu/yolov7/blob/main/LICENSE.md).
 
 ## References
 

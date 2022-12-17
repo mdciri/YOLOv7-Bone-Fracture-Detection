@@ -4,9 +4,11 @@ import numpy as np
 import streamlit as st
 import onnxruntime as ort
 from matplotlib.colors import TABLEAU_COLORS 
+from pathlib import Path
+
 
 ALLOWED_EXTENSIONS = {"txt", "pdf", "png", "jpg", "jpeg", "gif"}
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = Path(__file__).parent.absolute().__str__() # os.path.dirname(os.path.abspath(__file__))
 h, w = 640, 640
 model_onnx_path = os.path.join(BASE_DIR, "yolov7-p6-bonefracture.onnx")
 device = "cuda"
