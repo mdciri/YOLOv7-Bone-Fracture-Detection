@@ -8,9 +8,9 @@ from pathlib import Path
 
 
 ALLOWED_EXTENSIONS = {"txt", "pdf", "png", "jpg", "jpeg", "gif"}
-BASE_DIR = Path(__file__).parent.absolute().__str__() # os.path.dirname(os.path.abspath(__file__))
+parent_root = Path(__file__).parent.parent.absolute().__str__() # os.path.dirname(os.path.abspath(__file__))
 h, w = 640, 640
-model_onnx_path = os.path.join(BASE_DIR, "yolov7-p6-bonefracture.onnx")
+model_onnx_path = os.path.join(parent_root, "yolov7-p6-bonefracture.onnx")
 device = "cuda"
 
 def color_list():
@@ -121,13 +121,15 @@ if __name__ == "__main__":
         out_img, out_txt = post_process(img, out, conf_thres)
         st.image(out_img, caption="Prediction", channels="RGB")
 
-        st.download_button(
+        col1, col2 = st.columns(2)
+
+        col1.download_button(
             label="Download prediction",
             data=cv2.imencode(".png", out_img[..., ::-1])[1].tobytes(),
             file_name=uploaded_file.name,
             mime="image/png"
         )
-        st.download_button(
+        col2.download_button(
             label="Download detections",
             data=out_txt,
             file_name=uploaded_file.name[:-4] + ".txt",

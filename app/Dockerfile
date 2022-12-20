@@ -18,7 +18,7 @@ RUN mkdir app
 WORKDIR /app
 
 COPY webapp.py .
-COPY yolov7-p6-bonefracture.onnx .
+COPY ../yolov7-p6-bonefracture.onnx .
 
 COPY requirements-docker.txt .
 RUN pip install -U pip
