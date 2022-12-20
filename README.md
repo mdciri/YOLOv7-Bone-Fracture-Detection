@@ -115,12 +115,17 @@ The GUI is done using PySide6, so first install it with:
 
     pip install PySide6
 
-![overview](images/app.png)
-*Fig2: Bone Fracture Detection App GUI.*
+![overview](images/gui.png)
+
+*Fig2: Bone Fracture Detection GUI.*
 
 ## WebApp
 
     streamlit run app/webapp.py  
+
+![overview](images/webapp.png)
+
+*Fig3: Bone Fracture Detection WebApp made with streamlit.*
 
 ## Docker
 
