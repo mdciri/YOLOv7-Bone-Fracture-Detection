@@ -86,7 +86,7 @@ def post_process(img_file, output, score_threshold=0.3, format="xywh"):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model-path", type=str, default="runs/train/yolov7/weights/yolov7-p6-bonefracture.onnx", help="ONNX model path")
+    parser.add_argument("--model-path", type=str, default="./yolov7-p6-bonefracture.onnx", help="ONNX model path")
     parser.add_argument("--img-path", type=str, help="input image path")
     parser.add_argument("--dst-path", type=str, default=None, help="folder path destination")
     parser.add_argument("--device", type=str, default="cpu", help="device for onnxruntime provider")
