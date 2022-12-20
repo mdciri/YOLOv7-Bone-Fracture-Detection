@@ -88,7 +88,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--model-path", type=str, default="./yolov7-p6-bonefracture.onnx", help="ONNX model path")
     parser.add_argument("--img-path", type=str, help="input image path")
-    parser.add_argument("--dst-path", type=str, default=None, help="folder path destination")
+    parser.add_argument("--dst-path", type=str, default="./predictions", help="folder path destination")
     parser.add_argument("--device", type=str, default="cpu", help="device for onnxruntime provider")
     parser.add_argument("--score-tresh", type=float, default=0.3, help="score treshold")
     parser.add_argument("--bbox-format", type=str, default="xywh", help="bounding box format to save annotation (or xyxy)")
@@ -109,11 +109,10 @@ if __name__ == "__main__":
     print(f"Inferece completed in {elapsed_time:.3f} secs.")
 
     # save prediciton
-    if args.dst_path:
-        os.makedirs(args.dst_path, exist_ok=True)
-        bn = os.path.basename(args.img_path).split(".")[0]
-        cv2.imwrite(os.path.join(args.dst_path, bn + ".png"), out_img[..., ::-1])
-        with open(os.path.join(args.dst_path, bn + ".txt"), 'w') as f:
-            f.write(out_txt)
+    os.makedirs(args.dst_path, exist_ok=True)
+    bn = os.path.basename(args.img_path).split(".")[0]
+    cv2.imwrite(os.path.join(args.dst_path, bn + ".png"), out_img[..., ::-1])
+    with open(os.path.join(args.dst_path, bn + ".txt"), 'w') as f:
+        f.write(out_txt)
 
-        print(f"Predicted image and annotations are now saved in {args.dst_path}.")
+    print(f"Predicted image and annotations are now saved in {args.dst_path}.")
