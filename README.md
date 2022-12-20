@@ -21,8 +21,8 @@ The [GRAZPEDWRI-DX](https://www.nature.com/articles/s41597-022-01328-z) is a ope
 - `softtissue` (464 boxes),
 - `text` (23722 boxes).
 
-![overview](images/overview.png)
-*Fig1: few random testing images visulaization within their ground-truth label and relative bounding box.*
+![overview](images/overview_pred.png)
+*Fig1: few random testing images visualization within their realive ground-truth and the predicted labels with their confidence score by the trained YOLOv7-p6 model.*
 
 The data are already annotate in many different formats, one of the is the YOLO one. Indeed, [YOLOv7](https://github.com/WongKinYiu/yolov7.git) is the chosen model for this project.
 
@@ -77,15 +77,25 @@ will divide the dataset into training, validation, and testing set (70-20-10 %) 
 
 The script will create 3 files: `train_data.csv`, `valid_data.csv`, and `test_data.csv` with the same structure of `dataset.csv`.
 
+## Download the models
+
+You can download the models from `Releases` on the right banner. On the other hand you can also download them typing on your terminal:
+
+    wget https://github.com/mdciri/YOLOv7-Bone-Fracture-Detection/releases/download/trained-models/yolov7-p6-bonefracture.onnx
+
+or
+
+    wget https://github.com/mdciri/YOLOv7-Bone-Fracture-Detection/releases/download/trained-models/yolov7-p6-bonefracture.pt
+
 ## ONNX Inference
 
-It is available the ONNX model in `runs/train/yolov7/weights/yolov7-p6-bonefracture.onnx`, and inferece can be performed:
+It is available the ONNX model in `./yolov7-p6-bonefracture.onnx`, and inferece can be performed:
 
     python inference_onnx.py --model-path <onnx model path> --img-path <input image path> --dst-path <destination folder for predictions>
 
 for example:
 
-    python inference_onnx.py --model-path runs/train/yolov7/weights/yolov7-p6-bonefracture.onnx --img-path ./GRAZPEDWRI-DX_dataset/images/test/0038_0775938745_03_WRI-L2_M014.png --dst-path ./predictions
+    python inference_onnx.py --model-path ./yolov7-p6-bonefracture.onnx --img-path ./GRAZPEDWRI-DX_dataset/images/test/0038_0775938745_03_WRI-L2_M014.png --dst-path ./predictions
 
 The results (the predicted labelled image in `.png` file, and the predicted labels in `.txt` file) in the destination folder indicated. Each detection is saved as:
 
@@ -97,7 +107,7 @@ N.B.: remeber to install the requirements:
 
 ## App GUI
 
-    python app/app.py
+    python gui/gui.py
 
 GUI icons were made by [Freepik](https://www.flaticon.com/authors/freepik), [smashingstocks](https://www.flaticon.com/authors/smashingstocks), [photo3idea_studio](https://www.flaticon.com/authors/photo3idea-studio), [Yogi Aprelliyanto](https://www.flaticon.com/authors/yogi-aprelliyanto), [Muhammad Ali](https://www.flaticon.com/authors/muhammad-ali), and [dmitri13](https://www.flaticon.com/authors/dmitri13) from [www.flaticon.com](www.flaticon.com).
 
@@ -106,6 +116,7 @@ The GUI is done using PySide6, so first install it with:
     pip install PySide6
 
 ![overview](images/app.png)
+*Fig2: Bone Fracture Detection App GUI.*
 
 ## WebApp
 
@@ -118,22 +129,15 @@ The GUI is done using PySide6, so first install it with:
 
 ## Train, test, detect
 
-The torch model is also available in `runs/train/yolov7/weights/yolov7-p6-bonefracture.pt` and you can evaluate it or perform inference using `test.py` and `detect.py` script respectively of the YOLOv7 repo. On the contrary, if you want to train the model, use `train.py`.
+The torch model is also available in `./yolov7-p6-bonefracture.pt` and you can evaluate it or perform inference using `test.py` and `detect.py` script respectively of the YOLOv7 repo. On the contrary, if you want to train the model, use `train.py`.
 
 ## Results
 
 The evaluation of the 3 different datasets is collected in the `runs/test` folder. For each dataset are saved the predicted labels by the model, the confusion matrix, the F1, P, R, and PR curve plot.
 
-## Visualization
-
-You can use `data_overview.ipnb` to describe a dataset (`.csv` file) and visulize the ground-truth labels with or without the predicted ones as in Figure 2 here below.
-
-![overview](images/overview_pred.png)
-*Fig2: few random testing images visualization within their realive ground-truth and the predicted labels with their confidence score by the trained YOLOv7-p6 model.*
-
 ## License
 
-GNU General Public License v3.0 as for [YOLOv7](https://github.com/WongKinYiu/yolov7/blob/main/LICENSE.md).
+GNU General Public License v3.0 as the [YOLOv7 lincense](https://github.com/WongKinYiu/yolov7/blob/main/LICENSE.md).
 
 ## References
 
